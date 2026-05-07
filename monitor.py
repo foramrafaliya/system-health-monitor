@@ -1,4 +1,5 @@
 import psutil
+import time
 import datetime
 
 def get_stats():
@@ -19,5 +20,9 @@ def get_stats():
 
     if (disk.percent > 90):
         print("alert : disk full!!!")    
+
+while True:
+     get_stats()
+     time.sleep(5)    
    
-get_stats()
+get_stats()   
