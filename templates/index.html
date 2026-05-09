@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>System Health Monitor</title>
+</head>
+<body>
+    <h1>System Health Monitor</h1>
+    
+    <div id="cpu">CPU: Loading...</div>
+    <div id="ram">RAM: Loading...</div>
+    <div id="disk">Disk: Loading...</div>
+
+    <script>
+    function fetchStats() {
+        fetch('/metrics')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('cpu').innerText = `CPU: ${data.cpu}%`;
+                document.getElementById('ram').innerText = `RAM: ${data.ram}%`;
+                document.getElementById('disk').innerText = `Disk: ${data.disk}%`;
+            });
+    }
+
+    fetchStats();
+    setInterval(fetchStats, 5000);
+    </script>
+</body>
+</html>

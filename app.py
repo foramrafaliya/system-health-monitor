@@ -3,6 +3,11 @@ import psutil
 
 app = Flask(__name__)
 
+from flask import Flask, render_template
+@app.route('/')
+def index():
+    return render_template('index.html')
+
 @app.route('/metrics')
 def metrics():
     cpu = psutil.cpu_percent()
