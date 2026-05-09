@@ -4,6 +4,10 @@ import datetime
 import logging
 import smtplib
 from email.mime.text import MIMEText
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 logging.basicConfig(
     filename='health.log',
@@ -12,23 +16,26 @@ logging.basicConfig(
 )
 
 def send_alert(subject, message):
-    sender = "foramrafaliya3012@gmail.com"
-    receiver = "foramrafaliya3012@gmail.com"
-    password = "jhbv ubvt mvtj rtvb"
+    sender = os.getenv("EMAIL")
+    password = os.getenv("PASSWORD")
+    receiver = os.getenv("EMAIL")
     
     msg = MIMEText(message)
     msg['Subject'] = subject
     msg['From'] = sender
     msg['To'] = receiver
 
-    with smtplib.SMTP('smtp.gmail.com', 587) as server:
-        server.starttls()
-        server.login("foramrafaliya3012@gmail.com", "jhbv ubvt mvtj rtvb")
-        server.sendmail("foramrafaliya3012@gmail.com", "foramrafaliya3012@gmail.com", msg.as_string())
-    
-    print("Alert email sent!")
-    
+    try:
+        with smtplib.SMTP('smtp.gmail.com', 587) as server:
+            server.starttls()
+            server.login(sender, password)
+            server.sendmail(sender, receiver, msg.as_string())
+        print("Alert email sent!")
+    except Exception as e:
+        print(f"Email failed: {e}")
+        logging.error(f"Email failed: {e}")    
   
+    
 def get_stats():
     cpu = psutil.cpu_percent()
     ram = psutil.virtual_memory()
@@ -61,5 +68,3 @@ def get_stats():
 while True:
      get_stats()
      time.sleep(5)    
-   
-get_stats()   
