@@ -71,3 +71,4 @@ Browser → Flask /metrics API → psutil → Linux /proc → CPU/RAM/Disk data
 
 ## Project Motivation
 Built this project to understand how monitoring tools like Prometheus and Grafana work internally. Already used Grafana in RetailOps project to monitor 13 microservices — wanted to implement the core monitoring logic from scratch using Python and Linux /proc filesystem.
+

@@ -50,10 +50,10 @@ def get_stats():
     logging.info(f"Disk Usage   : {disk.percent}% ({disk.used // 1024**3} GB used)")
     print(f"Disk Usage   : {disk.percent}% ({disk.used // 1024**3} GB used)")
     
-    if (cpu >= 80):
+    if (cpu >= 90):
         logging.info("alert : cpu high!!!")
         print("alert : cpu high!!!")
-        send_alert("CPU Alert!", f"CPU usage is {cpu}% - exceeded 80% threshold!")
+        send_alert("PR PVT.LTD!", f"CPU usage is {cpu}% - exceeded 80% threshold!")
 
     if (ram.percent > 80):
         logging.info("alert : ram high!!!")
